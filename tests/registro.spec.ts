@@ -29,32 +29,39 @@ test('TC-4 Verificar redireccionamiento a pagina de inicio de sesión al hacer c
     await page.goto('http://localhost:3000/');
     await page.getByTestId('boton-login-header-signup').click();
     await expect(page).toHaveURL('http://localhost:3000/login');
-});
+}); 
+
+let registeredEmail;
+let registeredPassword;
 
 test('TC-5 Verificar registro exitoso con datos válidos', async ({ page }) => {
     await page.goto('http://localhost:3000/');
     await page.locator('input[name="firstName"]').fill('Juan');
     await page.locator('input[name="lastName"]').fill('Torres');
-    await page.locator('input[name="email"]').fill('juantorres'+ Date.now().toString() + '@gmail.com');
-    await page.locator('input[name="password"]').fill('123456');
+    registeredEmail = 'juantorres' + Date.now().toString() + '@gmail.com'; //guardando el mail en una variable
+    registeredPassword = '123456'; //Asignar la contraseña en el test de registro
+    await page.locator('input[name="email"]').fill(registeredEmail);
+    await page.locator('input[name="password"]').fill(registeredPassword);
     await page.getByTestId('boton-registrarse').click();
     await expect(page.getByText('Registro exitoso')).toBeVisible();
 });
 
 test('TC-6 Verificar que un usuario no pueda registrarse con un correo electronico ya existente', async ({ page }) => {
-    const email = 'carlos'+ Date.now().toString() + '@gmail.com';
+    //const email = 'Juan'+ Date.now().toString() + '@gmail.com';
     await page.goto('http://localhost:3000/');
     await page.locator('input[name="firstName"]').fill('Juan');
     await page.locator('input[name="lastName"]').fill('Torres');
-    await page.locator('input[name="email"]').fill(email);
-    await page.locator('input[name="password"]').fill('123456');
+    registeredEmail = 'juantorres' + Date.now().toString() + '@gmail.com'; //guardando el mail en una variable
+    registeredPassword = '123456'; //Asignar la contraseña en el test de registro
+    await page.locator('input[name="email"]').fill(registeredEmail);
+    await page.locator('input[name="password"]').fill(registeredPassword);
     await page.getByTestId('boton-registrarse').click();
     await expect(page.getByText('Registro exitoso')).toBeVisible();
     await page.goto('http://localhost:3000/');
     await page.locator('input[name="firstName"]').fill('Juan');
     await page.locator('input[name="lastName"]').fill('Torres');
-    await page.locator('input[name="email"]').fill(email);
-    await page.locator('input[name="password"]').fill('123456');
+    await page.locator('input[name="email"]').fill(registeredEmail);
+    await page.locator('input[name="password"]').fill(registeredPassword);
     await page.getByTestId('boton-registrarse').click();
     await expect(page.getByText('Email already in use')).toBeVisible();
     await expect(page.getByText('Registro exitoso')).not.toBeVisible();
