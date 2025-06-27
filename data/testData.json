@@ -1,0 +1,9 @@
+{
+    "usuarioValido": {
+    "nombre": "Juan",
+    "apellido": "Torres",
+    "email": "carlos@gmail.com",
+    "contraseña": "123456"
+    }
+
+}
