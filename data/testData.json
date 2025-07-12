@@ -4,6 +4,16 @@
     "apellido": "Torres",
     "email": "carlos@gmail.com",
     "contraseña": "123456"
+    },
+
+    "usuarioInvalido": {
+    "email": "Ejemplo@gmail.com",
+    "contraseña": "123456"
+    },
+
+    "emailInvalido": {
+    "email": "testinvalido",
+    "contraseña": "password123"
     }
 
 }

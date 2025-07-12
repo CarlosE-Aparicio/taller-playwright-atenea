@@ -23,13 +23,6 @@ export class RegisterPage {
         await this.page.waitForLoadState('networkidle');
     }
 
-    /*async completarFormularioRegistro(firstName: string, lastName: string, email: string, password: string){
-        await this.firsNameInput.fill(firstName);
-        await this.lastNameInput.fill(lastName);
-        await this.emailInput.fill(email);
-        await this.passwordInput.fill(password); 
-    } */
-
     async completarFormularioRegistro(usuario: {nombre: string, apellido: string, email: string, contraseña: string}){
         await this.firstNameInput.fill(usuario.nombre);
         await this.lastNameInput.fill(usuario.apellido);
