@@ -19,8 +19,8 @@ jobs:
     env:
       MONGO_URI: ${{ secrets.MONGO_URI }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      PORT: 6007
-      VITE_API_BASE: http://localhost:6007/api
+      PORT: 4000
+      VITE_API_BASE: http://localhost:4000/api
 
     steps:
       - name: Checkout repo actual (con el workflow)
@@ -28,7 +28,7 @@ jobs:
 
       - name: Clonar repo Athena Redux Bank
         run: |
-          git clone https://github.com/Atenea-Conocimientos/redux-athena-bank.git app
+          git clone https://github.com/CarlosE-Aparicio/redux-athena-bank.git app
 
       - name: Crear archivo .env para backend
         run: |
@@ -54,7 +54,7 @@ jobs:
         run: npm install -g wait-on
 
       - name: Esperar backend
-        run: wait-on tcp:6007
+        run: wait-on tcp:4000
 
       - name: Instalar dependencias frontend
         run: |
