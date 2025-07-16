@@ -1,27 +1,24 @@
-import { Page, Locator } from "@playwright/test"; 
+
+import {Page, Locator} from '@playwright/test';
 
 export class DashboardPage {
     readonly page: Page;
-    readonly dashboardTitle : Locator;
+    readonly dashboardTitle: Locator;
     readonly botonDeAgregarCuenta: Locator;
-    readonly logoutButton: Locator;
-    readonly InicioSesiónExitoso;
     readonly botonEnviarDinero: Locator;
+    readonly elementosListaTransferencia: Locator;
+    readonly elementosListaMontoTransferencia: Locator;
 
     constructor(page: Page) {
         this.page = page;
-        this.dashboardTitle = page.getByTestId('titulo-dashboard');
-        this.botonDeAgregarCuenta = page.getByTestId('tarjeta-agregar-cuenta');
-        this.logoutButton = page.getByTestId('boton-logout');
-        this.InicioSesiónExitoso = page.getByText('Inicio de sesión exitoso');
+        this.dashboardTitle = page.getByTestId('titulo-dashboard')
+        this.botonDeAgregarCuenta = page.getByTestId('tarjeta-agregar-cuenta')
         this.botonEnviarDinero = page.getByTestId('boton-enviar')
+        this.elementosListaTransferencia = page.locator('[data-testid="descripcion-transaccion"]')
+        this.elementosListaMontoTransferencia = page.locator('[data-testid="monto-transaccion"]')
     }
 
-    async hacerLogout() {
-        await this.logoutButton.click();
-    }
-    
-      async visitarPaginaLogin() {
+    async visitarPaginaLogin() {
         await this.page.goto('http://localhost:3000/dashboard');
         await this.page.waitForLoadState('networkidle');
     }
@@ -31,12 +28,4 @@ export class DashboardPage {
         await this.page.waitForLoadState('networkidle');
     }
 
-    /*async completarFormularioRegistro(firstName: string, lastName: string, email: string, password: string){
-        await this.firsNameInput.fill(firstName);
-        await this.lastNameInput.fill(lastName);
-        await this.emailInput.fill(email);
-        await this.passwordInput.fill(password); 
-    } */
-
 }
-
